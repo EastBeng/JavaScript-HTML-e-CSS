@@ -1,0 +1,85 @@
+body{
+    background-image: url("boat.jpg") ;
+
+}
+
+h1{
+    color: white;
+    font: normal 30pt algerian;
+    font-weight: bold;
+    text-align: center;
+    padding: 150px;
+    font-style: italic;
+    
+    
+}
+
+div#box{
+    background: white;
+    margin: auto;
+    width: 350px;
+    margin-top: -145px;
+    border-radius: 20px 20px 20px 20px;
+    box-shadow: 5px 5px 10px black;
+    padding: 15px;
+}
+
+p{
+    margin-left: 15px;
+    font: normal 16px arial;
+}
+
+input#usu{
+    margin-left: 20px;
+    width: 200px;
+}
+
+input#senha{
+    margin-left: 30px;
+    width: 200px;
+}
+
+input#entra{
+    padding: 5px;
+    border-radius: 10px 10px 10px 10px;
+    width: 100px;
+    margin-top: 8px;
+    margin-left: 104px;
+    font: bold 15px arial;
+
+}
+
+input#entra:hover{
+    background-color: rgb(81, 47, 231);
+}
+
+p#link{
+    margin: auto;
+    font: normal 14px arial;
+    text-align: left;
+    width: 78px;
+    margin-left: 0px;
+}
+
+p#link:hover{
+    background-color: rgb(240, 75, 75);
+}
+
+p#link2{
+    margin: auto;
+    font: normal 14px arial;
+    text-align: left;
+    width: 39px;
+    margin-left: 90px;
+    margin-top: -17px;
+}
+
+p#link2:hover{
+    background-color: rgb(240, 75, 75);
+}
+
+p#copy{
+    text-align: center;
+    padding: 10px;
+    color: white;
+}
