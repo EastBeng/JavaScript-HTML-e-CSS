@@ -1,0 +1,64 @@
+body{
+    background-image: url("boat.jpg") ;
+
+}
+
+h1{
+    color: white;
+    font: normal 30pt algerian;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 180px;
+    font-style: italic;
+    
+    
+}
+
+div#box2{
+    background: white;
+    margin: auto;
+    width: 350px;
+    margin-top: 8px;
+    border-radius: 20px 20px 20px 20px;
+    box-shadow: 5px 5px 10px black;
+    padding: 15px;
+}
+
+input#cadusu{
+    margin-left: 2px;
+    width: 180px;
+}
+
+input#cadsenha{
+    margin-left: 10px;
+    width: 180px;
+}
+
+input#cadconfirma{
+    margin-left: 2px;
+    width: 180px;
+}
+
+p{
+    margin-left: 15px;
+    font: normal 15px arial;
+}
+
+input#cadastro{
+    padding: 5px;
+    border-radius: 10px 10px 10px 10px;
+    width: 100px;
+    margin-top: 8px;
+    margin-left: 104px;
+    font: bold 15px arial;
+}
+
+input#cadastro:hover{
+    background-color: rgb(81, 47, 231);
+}
+
+p#copy{
+    text-align: center;
+    padding: 10px;
+    color: white;
+}
