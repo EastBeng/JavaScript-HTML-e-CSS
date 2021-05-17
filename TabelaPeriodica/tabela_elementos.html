@@ -1,0 +1,1790 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TecWeb T2 | Gabriel Passos e Savio Fonseca</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            text-align: center;
+            color: #000000;
+        }
+
+        body {
+            background-color: rgb(248, 253, 255);
+        }
+
+        a {
+            text-decoration: none;
+            color: initial;
+        }
+
+        #container {
+            margin-top: 80px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+            gap: 2px;
+        }
+
+        .legendas {
+            grid-column: span 10;
+            grid-row: span 3;
+        }
+
+        #distribuicao {
+            grid-column: span 2;
+            grid-row: span 2;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            justify-content: space-around;
+            border: 1px solid #000000;
+            position: relative;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        #distribuicao p:last-of-type {
+            font-size: 1.7rem;
+            text-align: left;
+        }
+        #distribuicao h2 {
+            text-align: left;
+            margin-left: 18px;
+        }
+        #distribuicao p {
+            font-size: 1.2rem;
+        }
+        #distribuicao span {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            width: 5px;
+            word-break: break-all;
+            font-size: .55rem;
+            text-align: center;
+            line-height: .7rem;
+        }
+
+        .cols-grade {
+            margin-bottom: 20px;
+        }
+
+        .cols-grade p {
+            border-left: 1px solid;
+        }
+
+        .cols-grade p,
+        .linhas-grade p {
+            font-weight: bold;
+            border-color: #000000;
+        }
+
+        .linhas-grade {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            align-content: center;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .linhas-grade-2 {
+            width: 5px;
+            word-break: break-all;
+            font-size: .55rem;
+            text-align: center;
+            color: gray;
+        }
+
+        .cols-grade-2 {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            align-content: center;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .cols-grade-2 p {
+            font-weight: bold;
+        }
+
+        .cols-grade p,
+        .cols-grade-2 p,
+        .linhas-grade p,
+        li {
+            color: #123764;
+        }
+
+        #col-border-1:before {
+            border-left: 3px solid #123764;
+            right: -2px;
+        }
+        #col-border-3:before {
+            border-right: 3px solid #123764;
+            left: -2px;
+        }
+        #col-border-1:before,
+        #col-border-2:before,
+        #col-border-3:before {
+            content: '';
+            height: 7px;
+            border-top: 3px solid #123764;
+            position: absolute;
+            z-index: -1;
+        }
+        #col-border-1:before,
+        #col-border-3:before {
+            width: 50%;
+        }
+        #col-border-1,
+        #col-border-2,
+        #col-border-3 {
+            position: relative;
+        }
+        #col-border-2:before {
+            width: 100%;
+        }
+        #col-border-2 p {
+            background-color: rgb(248, 253, 255);
+        }
+
+        .legendas {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            align-content: flex-start;
+            justify-content: space-around;
+            align-items: flex-start;
+        }
+
+        li {
+            text-align: left;
+            list-style: none;
+        }
+
+        li span,
+        ul.lista-leg-estado li span {
+            content: '';
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            margin: 0 3px 2px 0;
+            position: relative;
+            border: 1px solid transparent;
+            vertical-align: middle;
+        }
+
+        ul.lista-leg-estado li span {
+            border-color: #000000;
+            text-align: center;
+            box-sizing: border-box;
+            padding: 4px 0;
+        }
+        ul.lista-leg-estado * {
+            text-align: left;
+        }
+
+        .dv-elemento {
+            position: relative;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            align-content: center;
+            justify-content: center;
+            align-items: center;
+            padding: 0 15px 0 5px;
+            box-sizing: border-box;
+            border: 2px solid transparent;
+            transition: .1s;
+            font-weight: bold;
+        }
+        .dv-elemento:hover {
+            border: 2px solid black;
+            transform: scale(1.1);
+            z-index: 2;
+            border-color: black;
+        }
+        .dv-elemento h2 {
+            font-size: 1.3rem;
+        }
+        .dv-elemento h2:first-child {
+            font-weight: 900;
+        }
+        .dv-elemento p {
+            font-size: .7rem;
+        }
+
+        span.lgd-topo-dir {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            font-size: .5rem !important;
+            line-height: .6rem;
+            text-align: right;
+        }
+
+        #espacamento {
+            grid-column: span 20;
+            margin-top: 15px;
+        }
+
+        .asterisco {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            align-content: flex-end;
+            justify-content: center;
+            align-items: flex-end;
+        }
+        .asterisco p {
+            text-align: right;
+        }
+
+        .gasoso,
+        .gasoso * {
+            color: blue;
+        }
+
+        .liquido {
+            color: red;
+        }
+
+        .desconhecido {
+            color: gray;
+        }
+
+        .nao-metais {
+            background-color: #00ef00;
+        }
+
+        .gases-nobres {
+            background-color: #66aaff;
+        }
+
+        .metais-alcalinos {
+            background-color: #fcac01;
+        }
+
+        .metais-alcalinos-terrosos {
+            background-color: #f2f302;
+        }
+
+        .semi-metais {
+            background-color: #53ce8d;
+        }
+
+        .halogenios {
+            background-color: #00dcb7;
+        }
+
+        .metais-representativos {
+            background-color: #9bbaaa;
+        }
+
+        .metais-de-transicao {
+            background-color: #d89a9b;
+        }
+
+        .lantanideos {
+            background-color: #fcab8d;
+        }
+
+        .actinidios {
+            background-color: #daabcb;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div id="container">
+        <!--div-->
+
+            <div></div>
+            <div class="cols-grade">
+                <p>1</p>
+            </div>
+            <div class="cols-grade">
+                <p>2</p>
+            </div>
+            <div class="cols-grade">
+                <p>3</p>
+            </div>
+            <div class="cols-grade">
+                <p>4</p>
+            </div>
+            <div class="cols-grade">
+                <p>5</p>
+            </div>
+            <div class="cols-grade">
+                <p>6</p>
+            </div>
+            <div class="cols-grade">
+                <p>7</p>
+            </div>
+            <div class="cols-grade">
+                <p>8</p>
+            </div>
+            <div class="cols-grade">
+                <p>9</p>
+            </div>
+            <div class="cols-grade">
+                <p>10</p>
+            </div>
+            <div class="cols-grade">
+                <p>11</p>
+            </div>
+            <div class="cols-grade">
+                <p>12</p>
+            </div>
+            <div class="cols-grade">
+                <p>13</p>
+            </div>
+            <div class="cols-grade">
+                <p>14</p>
+            </div>
+            <div class="cols-grade">
+                <p>15</p>
+            </div>
+            <div class="cols-grade">
+                <p>16</p>
+            </div>
+            <div class="cols-grade">
+                <p>17</p>
+            </div>
+            <div class="cols-grade">
+                <p>18</p>
+            </div>
+            <div></div>
+
+            <div></div>
+            <div class="cols-grade-2">
+                <p>1A</p>
+            </div>
+            <div></div>
+            <div class="legendas">
+                <div>
+                    <ul>
+                        <li>
+                            <span class="metais-alcalinos"></span>
+                            Metais alcalinos
+                        </li>
+                        <li>
+                            <span class="metais-alcalinos-terrosos"></span>
+                            Metais alcalino-terrosos
+                        </li>
+                        <li>
+                            <span class="metais-de-transicao"></span>
+                            Metais de transição
+                        </li>
+                        <li>
+                            <span class="lantanideos"></span>
+                            Lantanídeos
+                        </li>
+                        <li>
+                            <span class="actinidios"></span>
+                            Actinídeos
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <ul>
+                        <li>
+                            <span class="metais-representativos"></span>
+                            Metais representativos
+                        </li>
+                        <li>
+                            <span class="semi-metais"></span>
+                            Semi-metais
+                        </li>
+                        <li>
+                            <span class="nao-metais"></span>
+                            Não metais
+                        </li>
+                        <li>
+                            <span class="halogenios"></span>
+                            Halogênios
+                        </li>
+                        <li>
+                            <span class="gases-nobres"></span>
+                            Gases nobres
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <ul class="lista-leg-estado">
+                        <li>
+                            <span>C</span>
+                            Sólido
+                        </li>
+                        <li>
+                            <span class="liquido">Hg</span>
+                            Líquido
+                        </li>
+                        <li>
+                            <p class="gasoso">
+                                <span>H</span>
+                                Gasoso
+                            </p>
+                        </li>
+                        <li>
+                            <p class="desconhecido">
+                                <span>Rf</span>
+                                Desconhecido
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div class="cols-grade-2">
+                <p>8A</p>
+            </div>
+            <div></div>
+
+            <div class="linhas-grade">
+                <p>1</p>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Hidrog%C3%A9nio" target="_blank">
+                    <div class="dv-elemento nao-metais">
+                        <h2>1</h2>
+                        <span class="lgd-topo-dir">1</span>
+                        <h2 class="gasoso">H</h2>
+                        <p>Hidrogênio</p>
+                    </div>
+                </a>
+            </div>
+            <div class="cols-grade-2">
+                <p>2A</p>
+            </div>
+            <div class="cols-grade-2">
+                <p>3A</p>
+            </div>
+            <div class="cols-grade-2">
+                <p>4A</p>
+            </div>
+            <div class="cols-grade-2">
+                <p>5A</p>
+            </div>
+            <div class="cols-grade-2">
+                <p>6A</p>
+            </div>
+            <div class="cols-grade-2">
+                <p>7A</p>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/H%C3%A9lio" target="_blank">
+                    <div class="dv-elemento gases-nobres">
+                        <h2>2</h2>
+                        <span class="lgd-topo-dir">2</span>
+                        <h2 class="gasoso">He</h2>
+                        <p>Hélio</p>
+                    </div>
+                </a>
+            </div>
+            <div class="linhas-grade-2">
+                K
+            </div>
+
+            <div class="linhas-grade">
+                <p>2</p>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/L%C3%ADtio" target="_blank">
+                    <div class="dv-elemento metais-alcalinos">
+                        <h2>3</h2>
+                        <span class="lgd-topo-dir">2<br>1</span>
+                        <h2>Li</h2>
+                        <p>Lítio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Ber%C3%ADlio" target="_blank">
+                    <div class="dv-elemento metais-alcalinos-terrosos">
+                        <h2>4</h2>
+                        <span class="lgd-topo-dir">2<br>2</span>
+                        <h2>Be</h2>
+                        <p>Berílio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Boro" target="_blank">
+                    <div class="dv-elemento semi-metais">
+                        <h2>5</h2>
+                        <span class="lgd-topo-dir">2<br>3</span>
+                        <h2>B</h2>
+                        <p>Boro</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Carbono" target="_blank">
+                    <div class="dv-elemento nao-metais">
+                        <h2>6</h2>
+                        <span class="lgd-topo-dir">2<br>4</span>
+                        <h2>C</h2>
+                        <p>Carbono</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Azoto" target="_blank">
+                    <div class="dv-elemento nao-metais">
+                        <h2>7</h2>
+                        <span class="lgd-topo-dir">2<br>5</span>
+                        <h2 class="gasoso">N</h2>
+                        <p>Nitrogênio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Oxig%C3%A9nio" target="_blank">
+                    <div class="dv-elemento nao-metais">
+                        <h2>8</h2>
+                        <span class="lgd-topo-dir">2<br>6</span>
+                        <h2 class="gasoso">O</h2>
+                        <p>Oxigênio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Fl%C3%BAor" target="_blank">
+                    <div class="dv-elemento halogenios">
+                        <h2>9</h2>
+                        <span class="lgd-topo-dir">2<br>7</span>
+                        <h2 class="gasoso">F</h2>
+                        <p>Flúor</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/N%C3%A9on" target="_blank">
+                    <div class="dv-elemento gases-nobres">
+                        <h2>10</h2>
+                        <span class="lgd-topo-dir">2<br>8</span>
+                        <h2 class="gasoso">Ne</h2>
+                        <p>Neônio</p>
+                    </div>
+                </a>
+            </div>
+            <div class="linhas-grade-2">
+                KL
+            </div>
+
+            <div class="linhas-grade">
+                <p>3</p>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/S%C3%B3dio" target="_blank">
+                    <div class="dv-elemento metais-alcalinos">
+                        <h2>11</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>1</span>
+                        <h2>Na</h2>
+                        <p>Sódio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Magn%C3%A9sio" target="_blank">
+                    <div class="dv-elemento metais-alcalinos-terrosos">
+                        <h2>12</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>2</span>
+                        <h2>Mg</h2>
+                        <p>Magnésio</p>
+                    </div>
+                </a>
+            </div>
+            <div class="cols-grade-2">
+                <p>
+                    3B
+                </p>
+            </div>
+            <div class="cols-grade-2">
+                <p>
+                    4B
+                </p>
+            </div>
+            <div class="cols-grade-2">
+                <p>
+                    5B
+                </p>
+            </div>
+            <div class="cols-grade-2">
+                <p>
+                    6B
+                </p>
+            </div>
+            <div class="cols-grade-2">
+                <p>
+                    7B
+                </p>
+            </div>
+            <div class="cols-grade-2" id="col-border-1">
+            </div>
+            <div class="cols-grade-2" id="col-border-2">
+                <p>
+                    8B
+                </p>
+            </div>
+            <div class="cols-grade-2" id="col-border-3">
+            </div>
+            <div class="cols-grade-2">
+                <p>
+                    1B
+                </p>
+            </div>
+            <div class="cols-grade-2">
+                <p>
+                    2B
+                </p>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Alum%C3%ADnio" target="_blank">
+                    <div class="dv-elemento metais-representativos">
+                        <h2>13</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>3</span>
+                        <h2>Al</h2>
+                        <p>Alumínio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Sil%C3%ADcio" target="_blank">
+                    <div class="dv-elemento semi-metais">
+                        <h2>14</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>4</span>
+                        <h2>Si</h2>
+                        <p>Silício</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/F%C3%B3sforo" target="_blank">
+                    <div class="dv-elemento nao-metais">
+                        <h2>15</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>5</span>
+                        <h2>P</h2>
+                        <p>Fósforo</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Enxofre" target="_blank">
+                    <div class="dv-elemento nao-metais">
+                        <h2>16</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>6</span>
+                        <h2>S</h2>
+                        <p>Enxofre</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Cloro" target="_blank">
+                    <div class="dv-elemento halogenios">
+                        <h2>17</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>7</span>
+                        <h2 class="gasoso">Cl</h2>
+                        <p>Cloro</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/%C3%81rgon" target="_blank">
+                    <div class="dv-elemento gases-nobres">
+                        <h2>18</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>8</span>
+                        <h2 class="gasoso">Ar</h2>
+                        <p>Argônio</p>
+                    </div>
+                </a>
+            </div>
+            <div class="linhas-grade-2">
+                KLM
+            </div>
+
+            <div class="linhas-grade">
+                <p>4</p>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Pot%C3%A1ssio" target="_blank">
+                    <div class="dv-elemento metais-alcalinos">
+                        <h2>19</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>8<br>1</span>
+                        <h2>K</h2>
+                        <p>Potássio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/C%C3%A1lcio" target="_blank">
+                    <div class="dv-elemento metais-alcalinos-terrosos">
+                        <h2>20</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>8<br>2</span>
+                        <h2>Ca</h2>
+                        <p>Cálcio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Esc%C3%A2ndio" target="_blank">
+                    <div class="dv-elemento metais-de-transicao">
+                        <h2>21</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>9<br>2</span>
+                        <h2>Sc</h2>
+                        <p>Escândio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Tit%C3%A2nio" target="_blank">
+                    <div class="dv-elemento metais-de-transicao">
+                        <h2>22</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>10<br>2</span>
+                        <h2>Ti</h2>
+                        <p>Titânio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Van%C3%A1dio" target="_blank">
+                    <div class="dv-elemento metais-de-transicao">
+                        <h2>23</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>11<br>2</span>
+                        <h2>V</h2>
+                        <p>Vanádio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Cr%C3%B4mio" target="_blank">
+                    <div class="dv-elemento metais-de-transicao">
+                        <h2>24</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>13<br>1</span>
+                        <h2>Cr</h2>
+                        <p>Crômio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Mangan%C3%AAs" target="_blank">
+                    <div class="dv-elemento metais-de-transicao">
+                        <h2>25</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>13<br>2</span>
+                        <h2>Mn</h2>
+                        <p>Manganês</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Ferro" target="_blank">
+                    <div class="dv-elemento metais-de-transicao">
+                        <h2>26</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>14<br>2</span>
+                        <h2>Fe</h2>
+                        <p>Ferro</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Cobalto" target="_blank">
+                    <div class="dv-elemento metais-de-transicao">
+                        <h2>27</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>15<br>2</span>
+                        <h2>Co</h2>
+                        <p>Cobalto</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/N%C3%ADquel" target="_blank">
+                    <div class="dv-elemento metais-de-transicao">
+                        <h2>28</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>16<br>2</span>
+                        <h2>Ni</h2>
+                        <p>Níquel</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Cobre" target="_blank">
+                    <div class="dv-elemento metais-de-transicao">
+                        <h2>29</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>1</span>
+                        <h2>Cu</h2>
+                        <p>Cobre</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Zinco" target="_blank">
+                    <div class="dv-elemento metais-de-transicao">
+                        <h2>30</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>2</span>
+                        <h2>Zn</h2>
+                        <p>Zinco</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/G%C3%A1lio" target="_blank">
+                    <div class="dv-elemento metais-representativos">
+                        <h2>31</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>3</span>
+                        <h2>Ga</h2>
+                        <p>Gálio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Germ%C3%A2nio" target="_blank">
+                    <div class="dv-elemento semi-metais">
+                        <h2>32</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>4</span>
+                        <h2>Ge</h2>
+                        <p>Germânio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Ars%C3%AAnio" target="_blank">
+                    <div class="dv-elemento semi-metais">
+                        <h2>33</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>5</span>
+                        <h2>As</h2>
+                        <p>Arsênio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Sel%C3%AAnio" target="_blank">
+                    <div class="dv-elemento nao-metais">
+                        <h2>34</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>6</span>
+                        <h2>Se</h2>
+                        <p>Selênio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Bromo" target="_blank">
+                    <div class="dv-elemento halogenios">
+                        <h2>35</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>7</span>
+                        <h2 class="liquido">Br</h2>
+                        <p>Bromo</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Cr%C3%ADpton" target="_blank">
+                    <div class="dv-elemento gases-nobres">
+                        <h2>36</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>8</span>
+                        <h2 class="gasoso">Kr</h2>
+                        <p>Criptônio</p>
+                    </div>
+                </a>
+            </div>
+            <div class="linhas-grade-2">
+                KLMN
+            </div>
+
+            <div class="linhas-grade">
+                <p>5</p>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Rub%C3%ADdio" target="_blank">
+                    <div class="dv-elemento metais-alcalinos">
+                        <h2>37</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>8<br>1</span>
+                        <h2>Rb</h2>
+                        <p>Rubídio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Estr%C3%B4ncio" target="_blank">
+                    <div class="dv-elemento metais-alcalinos-terrosos">
+                        <h2>38</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>8<br>2</span>
+                        <h2>Sr</h2>
+                        <p>Estrôncio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/%C3%8Dtrio" target="_blank">
+                    <div class="dv-elemento metais-de-transicao">
+                        <h2>39</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>9<br>2</span>
+                        <h2>Y</h2>
+                        <p>Ítrio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Zirc%C3%B4nio" target="_blank">
+                    <div class="dv-elemento metais-de-transicao">
+                        <h2>40</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>10<br>2</span>
+                        <h2>Zr</h2>
+                        <p>Zircônio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Ni%C3%B3bio" target="_blank">
+                    <div class="dv-elemento metais-de-transicao">
+                        <h2>41</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>12<br>1</span>
+                        <h2>Nb</h2>
+                        <p>Nióbio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Molibd%C3%AAnio" target="_blank">
+                    <div class="dv-elemento metais-de-transicao">
+                        <h2>42</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>13<br>1</span>
+                        <h2>Mo</h2>
+                        <p>Molibdênio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Tecn%C3%A9cio" target="_blank">
+                    <div class="dv-elemento metais-de-transicao">
+                        <h2>43</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>13<br>2</span>
+                        <h2>Tc</h2>
+                        <p>Tecnécio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Rut%C3%AAnio" target="_blank">
+                    <div class="dv-elemento metais-de-transicao">
+                        <h2>44</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>15<br>1</span>
+                        <h2>Ru</h2>
+                        <p>Rutênio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/R%C3%B3dio" target="_blank">
+                    <div class="dv-elemento metais-de-transicao">
+                        <h2>45</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>16<br>1</span>
+                        <h2>Rh</h2>
+                        <p>Ródio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Pal%C3%A1dio" target="_blank">
+                    <div class="dv-elemento metais-de-transicao">
+                        <h2>46</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>18</span>
+                        <h2>Pd</h2>
+                        <p>Paládio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Prata" target="_blank">
+                    <div class="dv-elemento metais-de-transicao">
+                        <h2>47</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>18<br>1</span>
+                        <h2>Ag</h2>
+                        <p>Prata</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/C%C3%A1dmio" target="_blank">
+                    <div class="dv-elemento metais-de-transicao">
+                        <h2>48</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>18<br>2</span>
+                        <h2>Cd</h2>
+                        <p>Cádmio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/%C3%8Dndio%20(elemento%20qu%C3%ADmico)" target="_blank">
+                    <div class="dv-elemento metais-representativos">
+                        <h2>49</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>18<br>3</span>
+                        <h2>In</h2>
+                        <p>Índio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Estanho" target="_blank">
+                    <div class="dv-elemento metais-representativos">
+                        <h2>50</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>18<br>4</span>
+                        <h2>Sn</h2>
+                        <p>Estanho</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Antim%C3%B4nio" target="_blank">
+                    <div class="dv-elemento semi-metais">
+                        <h2>51</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>18<br>5</span>
+                        <h2>Sb</h2>
+                        <p>Antimônio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Tel%C3%BArio" target="_blank">
+                    <div class="dv-elemento semi-metais">
+                        <h2>52</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>18<br>6</span>
+                        <h2>Te</h2>
+                        <p>Telúrio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Iodo" target="_blank">
+                    <div class="dv-elemento halogenios">
+                        <h2>53</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>18<br>7</span>
+                        <h2>I</h2>
+                        <p>Iodo</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Xen%C3%B4nio" target="_blank">
+                    <div class="dv-elemento gases-nobres">
+                        <h2>54</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>18<br>8</span>
+                        <h2 class="gasoso">Xe</h2>
+                        <p>Xenônio</p>
+                    </div>
+                </a>
+            </div>
+            <div class="linhas-grade-2">
+                KLMNO
+            </div>
+
+            <div class="linhas-grade">
+                <p>6</p>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/C%C3%A9sio" target="_blank">
+                    <div class="dv-elemento metais-alcalinos">
+                        <h2>55</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>18<br>8<br>1</span>
+                        <h2>Cs</h2>
+                        <p>Césio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/B%C3%A1rio" target="_blank">
+                    <div class="dv-elemento metais-alcalinos-terrosos">
+                        <h2>56</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>18<br>8<br>2</span>
+                        <h2>Ba</h2>
+                        <p>Bário</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <div class="dv-elemento lantanideos">
+                    <h2>57-71</h2>
+                    <h2>*</h2>
+                </div>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/H%C3%A1fnio" target="_blank">
+                    <div class="dv-elemento metais-de-transicao">
+                        <h2>72</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>32<br>10<br>2</span>
+                        <h2>Hf</h2>
+                        <p>Háfnio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/T%C3%A2ntalo%20(elemento%20qu%C3%ADmico)" target="_blank">
+                    <div class="dv-elemento metais-de-transicao">
+                        <h2>73</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>32<br>11<br>2</span>
+                        <h2>Ta</h2>
+                        <p>Tântalo</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Tungst%C3%AAnio" target="_blank">
+                    <div class="dv-elemento metais-de-transicao">
+                        <h2>74</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>32<br>12<br>2</span>
+                        <h2>W</h2>
+                        <p>Tungstênio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/R%C3%AAnio" target="_blank">
+                    <div class="dv-elemento metais-de-transicao">
+                        <h2>75</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>32<br>13<br>2</span>
+                        <h2>Re</h2>
+                        <p>Rênio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/%C3%93smio" target="_blank">
+                    <div class="dv-elemento metais-de-transicao">
+                        <h2>76</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>32<br>14<br>2</span>
+                        <h2>Os</h2>
+                        <p>Ósmio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Ir%C3%ADdio" target="_blank">
+                    <div class="dv-elemento metais-de-transicao">
+                        <h2>77</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>32<br>15<br>2</span>
+                        <h2>Ir</h2>
+                        <p>Irídio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Platina" target="_blank">
+                    <div class="dv-elemento metais-de-transicao">
+                        <h2>78</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>32<br>17<br>1</span>
+                        <h2>Pt</h2>
+                        <p>Platina</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Ouro" target="_blank">
+                    <div class="dv-elemento metais-de-transicao">
+                        <h2>79</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>32<br>18<br>1</span>
+                        <h2>Au</h2>
+                        <p>Ouro</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Merc%C3%BArio%20(elemento%20qu%C3%ADmico)" target="_blank">
+                    <div class="dv-elemento metais-de-transicao">
+                        <h2>80</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>32<br>18<br>2</span>
+                        <h2 class="liquido">Hg</h2>
+                        <p>Mercúrio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/T%C3%A1lio" target="_blank">
+                    <div class="dv-elemento metais-representativos">
+                        <h2>81</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>32<br>18<br>3</span>
+                        <h2>Tl</h2>
+                        <p>Tálio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Chumbo" target="_blank">
+                    <div class="dv-elemento metais-representativos">
+                        <h2>82</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>32<br>18<br>4</span>
+                        <h2>Pb</h2>
+                        <p>Chumbo</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Bismuto" target="_blank">
+                    <div class="dv-elemento metais-representativos">
+                        <h2>83</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>32<br>18<br>5</span>
+                        <h2>Bi</h2>
+                        <p>Bismuto</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Pol%C3%B4nio" target="_blank">
+                    <div class="dv-elemento semi-metais">
+                        <h2>84</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>32<br>18<br>6</span>
+                        <h2>Po</h2>
+                        <p>Polônio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Astato" target="_blank">
+                    <div class="dv-elemento halogenios">
+                        <h2>85</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>32<br>18<br>7</span>
+                        <h2>At</h2>
+                        <p>Astato</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/R%C3%A1don" target="_blank">
+                    <div class="dv-elemento gases-nobres">
+                        <h2>86</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>32<br>18<br>8</span>
+                        <h2 class="gasoso">Rn</h2>
+                        <p>Randônio</p>
+                    </div>
+                </a>
+            </div>
+            <div class="linhas-grade-2">
+                KLMNOP
+            </div>
+
+            <div class="linhas-grade">
+                <p>7</p>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Fr%C3%A2ncio" target="_blank">
+                    <div class="dv-elemento metais-alcalinos">
+                        <h2>87</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>32<br>18<br>8<br>1</span>
+                        <h2>Fr</h2>
+                        <p>Frâncio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/R%C3%A1dio%20(elemento%20qu%C3%ADmico)" target="_blank">
+                    <div class="dv-elemento metais-alcalinos-terrosos">
+                        <h2>88</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>32<br>18<br>8<br>2</span>
+                        <h2>Ra</h2>
+                        <p>Rádio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <div class="dv-elemento actinidios">
+                    <h2>89-103</h2>
+                    <h2>**</h2>
+                </div>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Rutherf%C3%B3rdio" target="_blank">
+                    <div class="dv-elemento metais-de-transicao">
+                        <h2>104</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>32<br>32<br>10<br>2</span>
+                        <h2 class="desconhecido">Rf</h2>
+                        <p>Rutherfórdio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/D%C3%BAbnio" target="_blank">
+                    <div class="dv-elemento metais-de-transicao">
+                        <h2>105</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>32<br>32<br>11<br>2</span>
+                        <h2 class="desconhecido">Db</h2>
+                        <p>Dúbnio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Seab%C3%B3rgio" target="_blank">
+                    <div class="dv-elemento metais-de-transicao">
+                        <h2>106</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>32<br>32<br>12<br>2</span>
+                        <h2 class="desconhecido">Sg</h2>
+                        <p>Seabórgio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/B%C3%B3hrio" target="_blank">
+                    <div class="dv-elemento metais-de-transicao">
+                        <h2>107</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>32<br>32<br>13<br>2</span>
+                        <h2 class="desconhecido">Bh</h2>
+                        <p>Bóhrio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/H%C3%A1ssio" target="_blank">
+                    <div class="dv-elemento metais-de-transicao">
+                        <h2>108</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>32<br>32<br>14<br>2</span>
+                        <h2 class="desconhecido">Hs</h2>
+                        <p>Hássio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Meitn%C3%A9rio" target="_blank">
+                    <div class="dv-elemento metais-de-transicao">
+                        <h2>109</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>32<br>32<br>15<br>2</span>
+                        <h2 class="desconhecido">Mt</h2>
+                        <p>Meitnério</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Darmst%C3%A1dtio" target="_blank">
+                    <div class="dv-elemento metais-de-transicao">
+                        <h2>110</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>32<br>32<br>17<br>2</span>
+                        <h2 class="desconhecido">Ds</h2>
+                        <p>Darmstádtio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Roentg%C3%AAnio" target="_blank">
+                    <div class="dv-elemento metais-de-transicao">
+                        <h2>111</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>32<br>32<br>18<br>1</span>
+                        <h2 class="desconhecido">Rg</h2>
+                        <p>Roentgênio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Copern%C3%ADcio" target="_blank">
+                    <div class="dv-elemento metais-de-transicao">
+                        <h2>112</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>32<br>32<br>18<br>2</span>
+                        <h2 class="desconhecido">Cn</h2>
+                        <p>Copernício</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Nihonium" target="_blank">
+                    <div class="dv-elemento metais-representativos">
+                        <h2>113</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>32<br>32<br>18<br>3</span>
+                        <h2 class="desconhecido">Uut</h2>
+                        <p>Ununtrio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Fler%C3%B3vio" target="_blank">
+                    <div class="dv-elemento metais-representativos">
+                        <h2>114</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>32<br>32<br>18<br>4</span>
+                        <h2 class="desconhecido">Fl</h2>
+                        <p>Fleróvio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Mosc%C3%B3vio" target="_blank">
+                    <div class="dv-elemento metais-representativos">
+                        <h2>115</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>32<br>32<br>18<br>5</span>
+                        <h2 class="desconhecido">Uup</h2>
+                        <p>Ununpentio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Liverm%C3%B3rio" target="_blank">
+                    <div class="dv-elemento metais-representativos">
+                        <h2>116</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>32<br>32<br>18<br>7</span>
+                        <h2 class="desconhecido">Lv</h2>
+                        <p>Livermório</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Tenesso" target="_blank">
+                    <div class="dv-elemento halogenios">
+                        <h2>117</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>32<br>32<br>18<br>7</span>
+                        <h2 class="desconhecido">Uus</h2>
+                        <p>Ununséptio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Oganesson" target="_blank">
+                    <div class="dv-elemento gases-nobres">
+                        <h2>118</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>32<br>32<br>18<br>8</span>
+                        <h2 class="desconhecido">UUo</h2>
+                        <p>Ununóctio</p>
+                    </div>
+                </a>
+            </div>
+            <div class="linhas-grade-2">
+                KLMNOPQ
+            </div>
+
+            <div id="espacamento"></div>
+
+            <div></div>
+            <div id="distribuicao">
+                <p>Nº Atômico</p>
+                <h2>Simbolo</h2>
+                <p>Nome</p>
+                <span>DISTRIBUIÇÃO</span>
+            </div>
+            <div class="asterisco">
+                <p>*</p>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Lant%C3%A2nio" target="_blank">
+                    <div class="dv-elemento lantanideos">
+                        <h2>57</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>18<br>9<br>2</span>
+                        <h2>La</h2>
+                        <p>Lantânio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/C%C3%A9rio" target="_blank">
+                    <div class="dv-elemento lantanideos">
+                        <h2>58</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>19<br>9<br>2</span>
+                        <h2>Ce</h2>
+                        <p>Cério</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Praseod%C3%ADmio" target="_blank">
+                    <div class="dv-elemento lantanideos">
+                        <h2>59</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>21<br>8<br>2</span>
+                        <h2>Pr</h2>
+                        <p>Praseodímio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Neod%C3%ADmio" target="_blank">
+                    <div class="dv-elemento lantanideos">
+                        <h2>60</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>22<br>8<br>2</span>
+                        <h2>Nd</h2>
+                        <p>Neodímio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Prom%C3%A9cio" target="_blank">
+                    <div class="dv-elemento lantanideos">
+                        <h2>61</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>23<br>8<br>2</span>
+                        <h2 class="desconhecido">Pm</h2>
+                        <p>Promécio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Sam%C3%A1rio" target="_blank">
+                    <div class="dv-elemento lantanideos">
+                        <h2>62</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>24<br>8<br>2</span>
+                        <h2>Sm</h2>
+                        <p>Samário</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Eur%C3%B3pio" target="_blank">
+                    <div class="dv-elemento lantanideos">
+                        <h2>63</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>25<br>8<br>2</span>
+                        <h2>Eu</h2>
+                        <p>Európio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Gadol%C3%ADnio" target="_blank">
+                    <div class="dv-elemento lantanideos">
+                        <h2>64</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>25<br>9<br>2</span>
+                        <h2>Gd</h2>
+                        <p>Gadolínio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/T%C3%A9rbio" target="_blank">
+                    <div class="dv-elemento lantanideos">
+                        <h2>65</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>27<br>8<br>2</span>
+                        <h2>Tb</h2>
+                        <p>Térbio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Dispr%C3%B3sio" target="_blank">
+                    <div class="dv-elemento lantanideos">
+                        <h2>66</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>28<br>8<br>2</span>
+                        <h2>Dy</h2>
+                        <p>Disprósio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/H%C3%B3lmio" target="_blank">
+                    <div class="dv-elemento lantanideos">
+                        <h2>67</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>29<br>8<br>2</span>
+                        <h2>Ho</h2>
+                        <p>Hólmio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/%C3%89rbio" target="_blank">
+                    <div class="dv-elemento lantanideos">
+                        <h2>68</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>30<br>8<br>2</span>
+                        <h2>Er</h2>
+                        <p>Érbio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/T%C3%BAlio" target="_blank">
+                    <div class="dv-elemento lantanideos">
+                        <h2>69</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>31<br>8<br>2</span>
+                        <h2>Tm</h2>
+                        <p>Túlio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/It%C3%A9rbio" target="_blank">
+                    <div class="dv-elemento lantanideos">
+                        <h2>70</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>32<br>8<br>2</span>
+                        <h2>Yb</h2>
+                        <p>Itérbio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Lut%C3%A9cio" target="_blank">
+                    <div class="dv-elemento lantanideos">
+                        <h2>71</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>32<br>9<br>2</span>
+                        <h2>Lu</h2>
+                        <p>Lutécio</p>
+                    </div>
+                </a>
+            </div>
+            <div class="linhas-grade-2">
+                KLMNOP
+            </div>
+
+            <div></div>
+            <div class="asterisco">
+                <p>**</p>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Act%C3%ADnio" target="_blank">
+                    <div class="dv-elemento actinidios">
+                        <h2>89</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>32<br>18<br>9<br>2</span>
+                        <h2>Ac</h2>
+                        <p>Actínio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/T%C3%B3rio" target="_blank">
+                    <div class="dv-elemento actinidios">
+                        <h2>90</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>32<br>18<br>10<br>2</span>
+                        <h2>Th</h2>
+                        <p>Tório</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Protact%C3%ADnio" target="_blank">
+                    <div class="dv-elemento actinidios">
+                        <h2>91</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>32<br>20<br>9<br>2</span>
+                        <h2>Pa</h2>
+                        <p>Protactínio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Ur%C3%A2nio" target="_blank">
+                    <div class="dv-elemento actinidios">
+                        <h2>92</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>32<br>21<br>9<br>2</span>
+                        <h2>U</h2>
+                        <p>Urânio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Nept%C3%BAnio" target="_blank">
+                    <div class="dv-elemento actinidios">
+                        <h2>93</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>32<br>22<br>9<br>2</span>
+                        <h2 class="desconhecido">Np</h2>
+                        <p>Neptúnio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Plut%C3%B3nio" target="_blank">
+                    <div class="dv-elemento actinidios">
+                        <h2>94</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>32<br>24<br>8<br>2</span>
+                        <h2 class="desconhecido">Pu</h2>
+                        <p>Plutônio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Amer%C3%ADcio" target="_blank">
+                    <div class="dv-elemento actinidios">
+                        <h2>95</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>32<br>25<br>8<br>2</span>
+                        <h2 class="desconhecido">Am</h2>
+                        <p>Amerício</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/C%C3%BArio" target="_blank">
+                    <div class="dv-elemento actinidios">
+                        <h2>96</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>32<br>25<br>9<br>2</span>
+                        <h2 class="desconhecido">Cm</h2>
+                        <p>Cúrio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Berqu%C3%A9lio" target="_blank">
+                    <div class="dv-elemento actinidios">
+                        <h2>97</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>32<br>27<br>8<br>2</span>
+                        <h2 class="desconhecido">Bk</h2>
+                        <p>Berquélio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Calif%C3%B3rnio" target="_blank">
+                    <div class="dv-elemento actinidios">
+                        <h2>98</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>32<br>28<br>8<br>2</span>
+                        <h2 class="desconhecido">Cf</h2>
+                        <p>Califórnio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Einst%C3%AAnio" target="_blank">
+                    <div class="dv-elemento actinidios">
+                        <h2>99</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>32<br>29<br>8<br>2</span>
+                        <h2 class="desconhecido">Es</h2>
+                        <p>Einstênio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/F%C3%A9rmio" target="_blank">
+                    <div class="dv-elemento actinidios">
+                        <h2>100</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>32<br>30<br>8<br>2</span>
+                        <h2 class="desconhecido">Fm</h2>
+                        <p>Férmio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Mendel%C3%A9vio" target="_blank">
+                    <div class="dv-elemento actinidios">
+                        <h2>101</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>32<br>31<br>8<br>2</span>
+                        <h2 class="desconhecido">MD</h2>
+                        <p>Mendelévio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Nob%C3%A9lio" target="_blank">
+                    <div class="dv-elemento actinidios">
+                        <h2>102</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>32<br>32<br>8<br>2</span>
+                        <h2 class="desconhecido">No</h2>
+                        <p>Nobélio</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://pt.wikipedia.org/wiki/Laur%C3%AAncio" target="_blank">
+                    <div class="dv-elemento actinidios">
+                        <h2>103</h2>
+                        <span class="lgd-topo-dir">2<br>8<br>18<br>32<br>32<br>8<br>3</span>
+                        <h2 class="desconhecido">Lr</h2>
+                        <p>Laurêncio</p>
+                    </div>
+                </a>
+            </div>
+            <div class="linhas-grade-2">
+                KLMNOPQ
+            </div>
+
+        <!--/div-->
+    </div>
+
+</body>
+
+</html>
