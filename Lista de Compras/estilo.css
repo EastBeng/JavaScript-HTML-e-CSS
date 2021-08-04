@@ -1,0 +1,227 @@
+/* geral */
+
+* {
+    font-family: Arial, Helvetica, sans-serif;
+    transition: .2s;
+    box-sizing: border-box;
+    outline: none;
+}
+
+a {
+    text-decoration: none;
+    color: initial;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* areas */
+
+.topo {
+    grid-area: topo;
+		position: sticky;
+		top: 0;
+		z-index: 1;
+}
+
+.menu {
+    grid-area: menu;
+    background-color: #EFEFEF;
+}
+
+.conteudo {
+    grid-area: conteudo;
+}
+
+.rodape {
+    grid-area: rodape;
+		position: fixed;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+}
+
+.container {
+    display: grid;
+    grid-template-areas:
+        'topo topo topo topo topo topo'
+        'menu conteudo conteudo conteudo conteudo conteudo'
+        'rodape rodape rodape rodape rodape rodape'
+    ;
+}
+
+/* estilos */
+
+.topo,
+.rodape {
+    background-color: #313131;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+.topo a,
+.rodape a {
+    color: #00cedd;
+}
+
+.menu > div {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	align-content: flex-start;
+	justify-content: flex-start;
+	align-items: flex-start;
+	position: sticky;
+	top: 100px;
+}
+.menu a {
+    padding: 10px;
+    width: 100%;
+}
+.menu a:nth-child(even) {
+    background-color: rgba(255, 255, 255, .5);
+}
+
+.conteudo {
+    padding: 30px 30px 160px 30px;
+		min-height: 82vh;
+}
+
+.container-produtos {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: stretch;
+    gap: 30px;
+}
+.box-produto {
+    padding: 20px;
+    width: 300px;
+    background-color: #EFEFEF;
+    border-radius: 10px;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+}
+.img-produto {
+    opacity: .2;
+}
+.box-produto input.nome-produto {
+    font-size: 1.05rem;
+    font-weight: bold;
+    margin: 10px 0;
+}
+.box-produto input {
+    border: none;
+    text-align: center;
+}
+.box-produto input[readonly] {
+    background-color: transparent;
+}
+.box-produto input[readonly].info-produto {
+    font-size: .7rem;
+    background-color: #FEFEFE;
+    padding: 3px 10px;
+}
+.box-produto input[readonly].info-produto,
+.box-produto input.qtds-produto {
+    border-radius: 10px;
+    max-width: 80px;
+}
+.box-produto input.qtds-produto {
+    height: 40px;
+    margin-top: 10px;
+}
+.box-produto .tag-coletado {
+    padding: 5px;
+    background-color: #39ea5f;
+    color: #FFFFFF;
+    font-weight: bold;
+    letter-spacing: 3px;
+    position: absolute;
+    width: 300px;
+    top: 15%;
+    right: -30%;
+    transform: rotate(45deg);
+}
+
+/* estilos - tela de cadastro*/
+
+#div-cadastro {
+    padding: 30px;
+    background-color: #EFEFEF;
+    border-radius: 10px;
+    margin-bottom: 60px;
+}
+
+form:not(.box-produto) input:not([type='checkbox']),
+form:not(.box-produto) button,
+form:not(.box-produto) select,
+#bt-servidor {
+    height: 40px;
+    border-radius: 10px;
+    padding: 0 10px;
+    font-size: initial;
+}
+form:not(.box-produto) label {
+    display: inline-block;
+    margin-top: 10px;
+}
+form:not(.box-produto) input:not([type='checkbox']),
+form:not(.box-produto) select {
+    border: 2px solid #CCCCCC;
+}
+form:not(.box-produto) button {
+    cursor: pointer;
+    margin: 0 5px;
+    border: 2px solid transparent;
+}
+#div-cadastro form:not(.box-produto) button {
+    margin-top: 30px;
+}
+form:not(.box-produto) button.bt-reset {
+    background-color: transparent;
+}
+form:not(.box-produto) button.bt-salvar,
+#bt-servidor {
+    background-color: #39ea5f;
+    font-weight: bold;
+    min-width: 150px;
+}
+
+.container-produtos .box-produto .bt-editar {
+    background-color: #c9c9c9;
+}
+.container-produtos .box-produto .bt-excluir {
+    background-color: #ea3939;
+}
+
+#bt-servidor {
+	cursor: pointer;
+	display: block;
+	margin: 30px 0 30px auto;
+	border: 2px solid transparent;
+}
+
+/* media querys */
+
+@media screen and (min-width: 1280px) {
+    
+    .menu a:hover {
+        transform: scale(1.01);
+    }
+
+    .box-produto:hover {
+        box-shadow: 0 15px 15px -5px #CCCCCC;
+    }
+
+    form:not(.box-produto) button:hover {
+        border: 2px solid #ffffff;
+        transform: scale(.95);
+    }
+
+}

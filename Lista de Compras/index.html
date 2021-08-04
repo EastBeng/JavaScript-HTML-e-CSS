@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="imagens/product.png" />
+
+    <title>T3 TecWeb - Cadastro de Produtos</title>
+
+    <link rel="stylesheet" href="estilo.css">
+</head>
+
+<body onload="carregaIndex()">
+
+    <div class="container">
+
+        <div class="topo">
+            <h1>
+                Lista de Compras TecWeb
+            </h1>
+        </div>
+
+        <div class="menu">
+            <div>
+                <a href="cadastro.html" target="_top">
+                    Cadastrar Produtos
+                </a>
+                <a href="#" target="_top">
+                    <b>Coletar Produtos</b>
+                </a>
+            </div>
+        </div>
+
+        <div class="conteudo">
+
+            <div class="container-produtos" id="lista-produtos">
+
+            </div>
+
+            <button disabled id="bt-servidor" class="bt-salvar" type="submit" onclick="enviaServidor()">Salvar</button>
+
+        </div>
+
+        <div class="rodape">
+            <h4>
+                Desenvolvido por:
+            </h4>
+            <p>
+                Gabriel Passos -
+                <a href="mailto:gabrielpassos@ucl.br">gabrielpassos@ucl.br</a> &
+                Savio Fonseca -
+                <a href="mailto:saviofonseca@ucl.br">saviofonseca@ucl.br</a>
+            </p>
+        </div>
+
+    </div>
+
+    <script src="funcoes.js"></script>
+
+</body>
+
+</html>
